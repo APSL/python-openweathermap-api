@@ -292,7 +292,7 @@ class Forecast(object):
         return getlistitem(self.city, 'stations_count')
     
     def __repr__(self):
-        return 'Forecast class: [id=%d, name=%s, country=%s]' % (self.id, self.city['name'], self.city['country']) 
+        return 'Forecast class: [id=%d, name=%s, country=%s]' % (self.identifier, self.city['name'], self.city['country']) 
 
 class ForecastItem(object):
     ''' This class represents a forecast item of the Forecast object'''
@@ -331,7 +331,7 @@ class ForecastItem(object):
     
     def getweathericonurl(self):
         ''' return the weather icon '''
-        icon = getlistitem(self.weather, 'icon')
+        icon = getlistitem(self.weather[0], 'icon')
         return self.ICON_URL % (icon)
     
     def getweatherdescription(self):
@@ -399,7 +399,7 @@ class ForecastItem(object):
         return getlistitem(self.wind, 'deg')
     
     def __repr__(self):
-        return 'ForecastItem class: [weather=%s, temp=%f, mintemp=%f, maxtemp=%f, windspeed=%f]' % (self.getweathermain(), self.getmaintempc(), self.getmaintempmaxc(), self.getwindspeedkm())
+        return 'ForecastItem class: [weather=%s, temp=%f, mintemp=%f, maxtemp=%f, windspeed=%f]' % (self.getweathermain(), self.getmaintempc(), self.getmaintempminc(), self.getmaintempmaxc(), self.getwindspeedkm())
     
     
 class Forecastcompact(object):
@@ -415,7 +415,7 @@ class ForecastItemcompact(object):
     
     ''' This class represents compact weather infos for a single day as part of the Compact_Forecast object'''
     def __init__(self, dt, temp, tempnight, tempeve, tempmorn, pressure, humidity, weather, windspeed, winddegree):
-        self.datetime = datetime
+        self.datetime = datetime.datetime.fromtimestamp(dt)
         self.temp = temp
         self.tempnight = tempnight
         self.tempeve = tempeve

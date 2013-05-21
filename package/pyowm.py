@@ -130,7 +130,7 @@ class OpenWeatherMapApi(object):
         
         forecast = self.openurldecodesimplejson(queryurl)
         
-        self.getforecastlistfrom_dictionary(forecast)
+        self.getforecastlistfromdictionary(forecast)
         
     
     def getforecastbyname(self, city):
