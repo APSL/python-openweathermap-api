@@ -179,5 +179,19 @@ class Test(unittest.TestCase):
             return True
             
 
+class TestForecast(unittest.TestCase):
+    
+    def setUp(self):
+        self.api = OpenWeatherMapApi()
+        self.city_id = 6324533
+        
+    def test_getdailyforecast(self):
+        dfc = self.api.getdailyforecast(self.city_id)
+        assert(dfc)
+        assert(dfc.forecastlist)
+        forecast = dfc.forecastlist[1]        
+        assert(forecast.datetime)
+        
+        
 if __name__ == "__main__":
     unittest.main()

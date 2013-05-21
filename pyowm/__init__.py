@@ -152,7 +152,7 @@ class OpenWeatherMapApi(object):
         
         compactforecast = self.openurldecodesimplejson(queryurl)
         
-        self.getcompactforecastfromdictionary(compactforecast)
+        return self.getcompactforecastfromdictionary(compactforecast)
     
     def getweatherstationinformation(self, identifier):
         ''' not implemented yet '''
@@ -206,8 +206,9 @@ class OpenWeatherMapApi(object):
                                          getlistitem(item, 'main'), getlistitem(item, 'wind'))
             forecastitems.append(forecastitem)
 
-        return Forecast(getlistitem(dict, 'id'), getlistitem(dict, 'city'), 
-                        getlistitem(dict, 'url'), forecastitems)
+        #import ipdb;ipdb.set_trace()
+        return Forecast(getlistitem(getlistitem(dictionary, 'city'), 'id'), getlistitem(dictionary, 'city'), 
+                        getlistitem(dictionary, 'url'), forecastitems)
         
     def getcompactforecastfromdictionary(self, dictionary):
         ''' returns a Forecast_compact object containing ForecastItem_compact objects'''
@@ -218,7 +219,7 @@ class OpenWeatherMapApi(object):
             compactforecastitem = ForecastItemcompact(getlistitem(item, 'dt'), getlistitem(item, 'temp'), 
                                                          getlistitem(item, 'night'), getlistitem(item, 'eve'), 
                                                          getlistitem(item, 'morn'), getlistitem(item, 'pressure'), 
-                                                         getlistitem(item, 'humidity'), getlistitem(item, 'weather'), 
+                                                         getlistitem(item, 'humidity'), getlistitem(item, 'weather')[0], 
                                                          getlistitem(item, 'speed'), getlistitem(item, 'deg'))
             forecastcompactitems.append(compactforecastitem)
             
