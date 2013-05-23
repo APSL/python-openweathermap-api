@@ -192,6 +192,10 @@ class TestForecast(unittest.TestCase):
         forecast = dfc.forecastlist[1]        
         assert(forecast.datetime)
         
+    def test_getcityweaterbyid(self):
+        weather = self.api.getcityweaterbyid(self.city_id)
+        assert(weather)
+       
         
 if __name__ == "__main__":
     unittest.main()

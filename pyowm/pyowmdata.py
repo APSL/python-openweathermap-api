@@ -175,6 +175,8 @@ class City(object):
         self.weather = weather
         ''' ?? '''
         self.sys = sys
+        ''' datetime of the city parsed '''
+        self.datetime = datetime.datetime.fromtimestamp(dt)
         
     def getcoordtuple(self):
         ''' return the coordinates as tuple (latitude, longitude'''
@@ -415,6 +417,7 @@ class ForecastItemcompact(object):
     
     ''' This class represents compact weather infos for a single day as part of the Compact_Forecast object'''
     def __init__(self, dt, temp, tempnight, tempeve, tempmorn, pressure, humidity, weather, windspeed, winddegree):
+        self.dt = dt
         self.datetime = datetime.datetime.fromtimestamp(dt)
         self.temp = temp
         self.tempnight = tempnight

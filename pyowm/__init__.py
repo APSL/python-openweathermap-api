@@ -14,7 +14,7 @@ import simplejson
 class OpenWeatherMapApi(object):
     
     OPENWEATHERMAP_FIND_URL = 'http://openweathermap.org/data/2.1/find/'
-    OPENWEATHERMAP_CITY_URL = 'http://openweathermap.org/data/2.1/weather/city/'
+    OPENWEATHERMAP_CITY_URL = 'http://api.openweathermap.org/data/2.5/weather'
     OPENWEATHERMAP_FORECAST_URL = 'http://openweathermap.org/data/2.1/forecast/city/'
     
     def getstationbycoordinates(self, latitude, longitude, count):
@@ -111,7 +111,7 @@ class OpenWeatherMapApi(object):
         ''' return the current weather in a concrete chosen city where you know 
         the city id.'''
         
-        querypart = '%d' % (identifier)
+        querypart = '?id=%d' % (identifier)
         queryurl = self.OPENWEATHERMAP_CITY_URL + querypart
         
         city = self.openurldecodesimplejson(queryurl)
@@ -120,7 +120,7 @@ class OpenWeatherMapApi(object):
                     getlistitem(city, 'coord'), getlistitem(city, 'distance'), 
                     getlistitem(city, 'main'), getlistitem(city, 'dt'), 
                     getlistitem(city, 'wind'), getlistitem(city, 'clouds'), 
-                    getlistitem(city, 'weather'), getlistitem(city, 'sys'))
+                    getlistitem(city, 'weather')[0], getlistitem(city, 'sys'))
     
     def getforecastbyid(self, identifier):
         ''' return the forecast of the city for the next 7 days by given id'''
